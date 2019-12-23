@@ -31,7 +31,13 @@ print(' ')
 
 # fetch profile data
 r3 = requests.get('https://www.reddit.com/user/'+username+'/about.json', headers=headers)
-userdata = r3.json()['data']
+
+# if not found or 404 returned, exit
+if (r3.json()['message'] == 'Not Found' or r1.json()['error'] == 404):
+    print("No Account Details Found, 404 Received")
+    exit()
+else:
+    userdata = r3.json()['data']
     
 # fetch comments
 while True:
